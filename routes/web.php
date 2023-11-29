@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\ListingController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,11 +15,27 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
-Route::get('/', function () {
-    
-    $users = DB::table('users')->get();
-    dd($users);
-    //return view('welcome');
+// Route::get('/', [ListingController::class, 'all']);
+
+// Route::get('/', function () {
+//     // return view('welcome');
+//     // $users = DB::table('users')->get();
+//     // dd($users);
+//     return view('listings', ["heading"=>"one",
+//                              "listings"=>[
+//                                 "title"=>"TestTitle",
+//                                 "description"=>"TestDescription"]]);
+// });
+
+Route::get('/', function(){
+    return view('welcome');
+});
+
+Route::resource('/listing' ,ListingController::class);
+
+Route::get('/test', function() {
+    // return view('testlistings');
+    return Response('<h1>Testing the routing</h1>', 200);
 });
 
 Route::get('/dashboard', function () {
